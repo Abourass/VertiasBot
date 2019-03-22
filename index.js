@@ -21,7 +21,7 @@ module.exports = async app => {
   router.post('/createSecToken', async (req, res) => {
     SecTokens.findOne({ userId: req.query.uId }).then(secToken => {
       if (secToken) {
-        res.send('Failed. A token for this user has already been generated')
+        res.json({failed: true, msg: 'Failed. A token for this user has already been generated'})
       } else {
         const newToken = Math.floor((Math.random() * 10000) + 1)
         const newSecTokens = new SecTokens({
@@ -30,7 +30,7 @@ module.exports = async app => {
           securityToken: newToken
         })
         newSecTokens.save().catch(err => console.log(err))
-        res.send(`User created, your security token is ${newToken}`)
+        res.json({ success: true, msg: `${newToken}`})
       }
     })
   })
