@@ -1,6 +1,6 @@
 # veritas-bot
 
-> A GitHub App built with [Probot](https://github.com/probot/probot) that A bot for managing GitHub from our core platform.
+> A GitHub App built with [Probot](https://github.com/probot/probot) for creating / managing issues from our core platform.
 
 ## Setup
 
