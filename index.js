@@ -2,13 +2,12 @@ module.exports = async app => {
   const mongoose = require('mongoose')
   const Token = require('./models/Tokens')
   const keys = require('./config/keys')
+  const router = app.route('/api')
+  router.use(require('express').static('public'))
+  router.use(require('mongoose'))
   mongoose.connect(keys.mongoURI, { useNewUrlParser: true }).then(() => console.log('Atlas is shouldering our burden | Database Aloft!')).catch(err => console.log(err))
   const appGitHub = await app.auth()
-  const router = app.route('/api')
-  // Use any middleware
-  router.use(require('express').static('public'))
   const owner = 'AssetVal'; const repo = 'AssetVal_Veritas'; let tagArray = []; let assArray = []
-
   router.get('/add', async (req, res) => {
     const installation = await appGitHub.apps.findRepoInstallation({ owner, repo }); const github = await app.auth(installation.data.id)
     const issue = {

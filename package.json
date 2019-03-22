@@ -24,7 +24,10 @@
     "@octokit/request": "^2.4.2",
     "@octokit/rest": "^16.20.0",
     "connect-mongo": "^2.0.3",
+    "cookie-parser": "^1.4.4",
+    "express-session": "^1.15.6",
     "mongoose": "^5.4.19",
+    "passport": "^0.4.0",
     "probot": "^9.0.2"
   },
   "devDependencies": {
