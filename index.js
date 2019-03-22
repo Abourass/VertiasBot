@@ -1,6 +1,6 @@
 module.exports = async app => {
   const mongoose = require('mongoose')
-  const SecToken = require('./models/SecurityTokens')
+  const Token = require('./models/Tokens')
   const keys = require('./config/keys')
   mongoose.connect(keys.mongoURI, { useNewUrlParser: true }).then(() => console.log('Atlas is shouldering our burden | Database Aloft!')).catch(err => console.log(err))
   const appGitHub = await app.auth()
@@ -23,18 +23,18 @@ module.exports = async app => {
   })
 
   router.post('/createSecToken', (req, res) => {
-    SecToken.findOne({ userId: req.query.uId }).then(secToken => {
-      if (secToken) {
+    Token.findOne({ userId: req.query.uId }).then(token => {
+      if (Token) {
         res.json({success: false, msg: 'Failed. A token for this user has already been generated'})
       } else {
-        const newToken = Math.floor((Math.random() * 10000) + 1)
-        const newSecTokens = new SecTokens({
+        const newTokenNumber = Math.floor((Math.random() * 10000) + 1)
+        const newToken = new Token({
           userId: req.query.uId,
           userFullName: req.query.name,
-          securityToken: newToken
+          securityToken: newTokenNumber
         })
-        newSecTokens.save().catch(err => console.log(err))
-        res.json({ success: true, msg: `${newToken}`})
+        newToken.save().catch(err => console.log(err))
+        res.json({ success: true, msg: `${newTokenNumber}`})
       }
     })
   })
