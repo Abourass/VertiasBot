@@ -15,4 +15,4 @@ const TokenSchema = new Schema({
 })
 
 // Create collection and add Schema
-mongoose.model('tokens', TokenSchema)
+mongoose.model('token', TokenSchema)
