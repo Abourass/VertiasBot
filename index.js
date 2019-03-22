@@ -3,9 +3,9 @@ module.exports = async app => {
   const SecToken = require('./models/SecurityTokens')
   const keys = require('./config/keys')
   mongoose.connect(keys.mongoURI, { useNewUrlParser: true }).then(() => console.log('Atlas is shouldering our burden | Database Aloft!')).catch(err => console.log(err))
-  const appGitHub = await app.auth() 
-  const router = app.route('/api') 
-    // Use any middleware
+  const appGitHub = await app.auth()
+  const router = app.route('/api')
+  // Use any middleware
   router.use(require('express').static('public'))
   const owner = 'AssetVal'; const repo = 'AssetVal_Veritas'; let tagArray = []; let assArray = []
 
