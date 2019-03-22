@@ -4,7 +4,7 @@ module.exports = async app => {
   const keys = require('./config/keys')
   mongoose.connect(keys.mongoURI, { useNewUrlParser: true }).then(() => console.log('Atlas is shouldering our burden | Database Aloft!')).catch(err => console.log(err))
   const appGitHub = await app.auth() 
-  const router = app.route('/') 
+  const router = app.route('/api') 
     // Use any middleware
   router.use(require('express').static('public'))
   const owner = 'AssetVal'; const repo = 'AssetVal_Veritas'; let tagArray = []; let assArray = []
@@ -22,8 +22,7 @@ module.exports = async app => {
     await github.issues.create(issue).then(res.send('Success')).catch(err => console.log(err))
   })
 
-  router.post('/createSecToken', async (req, res) => {
-    console.log(JSON.stringify(req))
+  router.post('/createSecToken', (req, res) => {
     SecToken.findOne({ userId: req.query.uId }).then(secToken => {
       if (secToken) {
         res.json({success: false, msg: 'Failed. A token for this user has already been generated'})
