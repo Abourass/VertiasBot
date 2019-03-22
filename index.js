@@ -1,9 +1,11 @@
 module.exports = async app => {
   const mongoose = require('mongoose')
-  const SecTokens = require('./models/SecurityTokens')
+  const SecToken = require('./models/SecurityTokens')
   const keys = require('./config/keys')
   mongoose.connect(keys.mongoURI, { useNewUrlParser: true }).then(() => console.log('Atlas is shouldering our burden | Database Aloft!')).catch(err => console.log(err))
-  const appGitHub = await app.auth(); const router = app.route('/issues'); const owner = 'AssetVal'; const repo = 'AssetVal_Veritas'; let tagArray = []; let assArray = []
+  const appGitHub = await app.auth() 
+  const router = app.route('/bot') 
+  const owner = 'AssetVal'; const repo = 'AssetVal_Veritas'; let tagArray = []; let assArray = []
 
   router.get('/add', async (req, res) => {
     const installation = await appGitHub.apps.findRepoInstallation({ owner, repo }); const github = await app.auth(installation.data.id)
@@ -19,7 +21,7 @@ module.exports = async app => {
   })
 
   router.post('/createSecToken', async (req, res) => {
-    SecTokens.findOne({ userId: req.query.uId }).then(secToken => {
+    SecToken.findOne({ userId: req.query.uId }).then(secToken => {
       if (secToken) {
         res.json({failed: true, msg: 'Failed. A token for this user has already been generated'})
       } else {
