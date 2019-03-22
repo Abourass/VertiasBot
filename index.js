@@ -5,6 +5,8 @@ module.exports = async app => {
   mongoose.connect(keys.mongoURI, { useNewUrlParser: true }).then(() => console.log('Atlas is shouldering our burden | Database Aloft!')).catch(err => console.log(err))
   const appGitHub = await app.auth() 
   const router = app.route('/') 
+    // Use any middleware
+  router.use(require('express').static('public'))
   const owner = 'AssetVal'; const repo = 'AssetVal_Veritas'; let tagArray = []; let assArray = []
 
   router.get('/add', async (req, res) => {
