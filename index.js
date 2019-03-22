@@ -1,10 +1,22 @@
 module.exports = async app => {
   const mongoose = require('mongoose')
-  const Token = require('./models/Tokens')
+  const Schema = mongoose.Schema
+  const TokenSchema = new Schema({
+    userId: {
+      type: String
+    },
+    userFullName: {
+      type: String
+    },
+    securityToken: {
+      type: String
+    }
+  })
+  // Create collection and add Schema
+  const Token = mongoose.model('token', TokenSchema)
   const keys = require('./config/keys')
   const router = app.route('/api')
   router.use(require('express').static('public'))
-  router.use(require('mongoose'))
   mongoose.connect(keys.mongoURI, { useNewUrlParser: true }).then(() => console.log('Atlas is shouldering our burden | Database Aloft!')).catch(err => console.log(err))
   const appGitHub = await app.auth()
   const owner = 'AssetVal'; const repo = 'AssetVal_Veritas'; let tagArray = []; let assArray = []
