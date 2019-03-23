@@ -34,19 +34,36 @@ module.exports = async app => {
     await github.issues.create(issue).then(res.send('Success')).catch(err => console.log(err))
   })
 
-  router.post('/createSecToken/id/:uID/name/:userName', (req, res) => {
-    let token = new Token({
-      userId: req.params.uID,
-      userFullName: req.params.userName,
-      securityToken: Math.floor((Math.random() * 10000) + 1)
+  router.get('/createSecToken/id/:uID/name/:userName', (req, res) => {
+    Token.findOne({ userId: req.params.uID }).then(token => {
+      if (token) {
+        res.send({ success: false, msg: 'Token already exist' })
+      } else {
+        let token = new Token({
+          userId: req.params.uID,
+          userFullName: req.params.userName,
+          securityToken: Math.floor((Math.random() * 10000) + 1)
+        })
+        token.save().catch(err => console.log(err))
+        res.send({ success: true, msg: token.securityToken })
+      }
     })
-    let errors = req.validationErrors()
-    if (errors) {
-      res.json({ success: false, msg: errors })
-    } else {
-      token.save().catch(err => console.log(err))
-      res.json({ success: true, msg: token.securityToken })
-    }
+  })
+
+  router.post('/createSecToken/id/:uID/name/:userName', (req, res) => {
+    Token.findOne({ userId: req.params.uID }).then(token => {
+      if (token) {
+        res.send({ success: false, msg: 'Token already exist' })
+      } else {
+        let token = new Token({
+          userId: req.params.uID,
+          userFullName: req.params.userName,
+          securityToken: Math.floor((Math.random() * 10000) + 1)
+        })
+        token.save().catch(err => console.log(err))
+        res.send({ success: true, msg: token.securityToken })
+      }
+    })
   })
 
   app.on(`*`, async context => {
