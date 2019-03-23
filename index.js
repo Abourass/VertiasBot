@@ -69,7 +69,7 @@ module.exports = async app => {
     router.post('/getSecToken/id/:uID/name/:userName', (req, res) => {
     Token.findOne({ userId: req.params.uID }).then(token => {
       if (token) {
-        res.send({ success: true, msg: token.SecurityToken })
+        res.send({ token.SecurityToken })
       } else {
         res.send({ success: false, msg: `No token exist for ${req.params.uID}` })
       }
