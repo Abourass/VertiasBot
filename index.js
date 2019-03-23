@@ -1,5 +1,6 @@
 module.exports = async app => {
   const mongoose = require('mongoose')
+  const request = require('request')
   const Schema = mongoose.Schema
   const TokenSchema = new Schema({
     userId: {
@@ -34,20 +35,18 @@ module.exports = async app => {
   })
 
   router.post('/createSecToken', (req, res) => {
-    let token = new Token()
-    token.userId: req.body.id
-    token.userFullName: req.body.name
-    token.securityToken: Math.floor((Math.random() * 10000) + 1)
-      req.checkBody('id', 'ID is required').notEmpty()
-      req.checkBody('name', 'Name is required').notEmpty()
+    let token = new Token({
+      userId: req.body.id,
+      userFullName: req.body.name,
+      securityToken: Math.floor((Math.random() * 10000) + 1)
+    })
     let errors = req.validationErrors()
     if (errors) {
-        res.json({ success: false, msg: errors });
+      res.json({ success: false, msg: errors })
     } else {
-        newToken.save().catch(err => console.log(err))
-        res.json({ success: true, msg: token.securityToken })
-      }
-    })
+      token.save().catch(err => console.log(err))
+      res.json({ success: true, msg: token.securityToken })
+    }
   })
 
   app.on(`*`, async context => {
