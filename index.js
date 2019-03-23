@@ -34,10 +34,10 @@ module.exports = async app => {
     await github.issues.create(issue).then(res.send('Success')).catch(err => console.log(err))
   })
 
-  router.post('/createSecToken', (req, res) => {
+  router.post('/createSecToken/id/:uID/name/:userName', (req, res) => {
     let token = new Token({
-      userId: req.body.id,
-      userFullName: req.body.name,
+      userId: req.params.uID,
+      userFullName: req.params.userName,
       securityToken: Math.floor((Math.random() * 10000) + 1)
     })
     let errors = req.validationErrors()
