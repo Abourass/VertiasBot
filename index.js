@@ -21,13 +21,13 @@ module.exports = async app => {
   router.post('/add', async (req, res) => {
     if (validateUser(req.query.user)) {
       const installation = await appGitHub.apps.findRepoInstallation({ owner, repo }); const github = await app.auth(installation.data.id)
+      tagArray.unshift(req.query.lab)
       const issue = {
         repo: repo,
         owner: owner,
         title: req.query.title,
         body: req.query.body,
-        labels: tagArray.unshift(req.query.lab),
-        assignees: assArray.unshift(req.query.as)
+        labels: tagArray
       }
       await github.issues.create(issue).then(res.send('Success')).catch(err => console.log(err))
     }
