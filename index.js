@@ -13,11 +13,12 @@ module.exports = async app => {
 
   const validateUser = async (user) => {
     await Token.findOne({ userId: user }).then(token => {
+      console.log(`user is ${user}`)
       if (token) { return true }
     })
   }
 
-  router.get('/add', async (req, res) => {
+  router.post('/add', async (req, res) => {
     if (validateUser(req.query.user)) {
       const installation = await appGitHub.apps.findRepoInstallation({ owner, repo }); const github = await app.auth(installation.data.id)
       const issue = {
