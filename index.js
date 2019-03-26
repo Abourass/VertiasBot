@@ -22,12 +22,15 @@ module.exports = async app => {
     if (validateUser(req.query.user)) {
       const installation = await appGitHub.apps.findRepoInstallation({ owner, repo }); const github = await app.auth(installation.data.id)
       tagArray.unshift(req.query.lab)
+      tagArray.unshift(req.query.pri)
+      assArray.unshift(req.query.ass)
       const issue = {
         repo: repo,
         owner: owner,
         title: req.query.title,
         body: req.query.body,
         labels: tagArray
+        assignees: assArray,
       }
       await github.issues.create(issue).then(res.send('Success')).catch(err => console.log(err))
     }
