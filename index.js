@@ -29,8 +29,8 @@ module.exports = async app => {
         owner: owner,
         title: req.query.title,
         body: req.query.body,
-        labels: tagArray
-        assignees: assArray,
+        labels: tagArray,
+        assignees: assArray
       }
       await github.issues.create(issue).then(res.send('Success')).catch(err => console.log(err))
     }
