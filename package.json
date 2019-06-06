@@ -15,45 +15,43 @@
   "scripts": {
     "dev": "nodemon",
     "start": "probot run ./index.js",
+    "prod": "pm2-runtime start ecosystem.config.js --env production",
     "lint": "standard --fix",
     "test": "jest && standard",
     "test:watch": "jest --watch --notify --notifyMode=change --coverage"
   },
   "dependencies": {
-    "@octokit/app": "^2.2.2",
-    "@octokit/request": "^2.4.2",
-    "@octokit/rest": "^16.20.0",
+    "@octokit/app": "^3.0.0",
+    "@octokit/request": "^4.1.0",
+    "@octokit/rest": "^16.27.3",
     "connect-mongo": "^2.0.3",
     "cookie-parser": "^1.4.4",
-    "express-session": "^1.15.6",
-    "mongoose": "^5.4.19",
+    "express-session": "^1.16.1",
+    "mongoose": "^5.5.13",
     "passport": "^0.4.0",
-    "probot": "^9.0.2",
+    "probot": "^9.2.13",
     "request": "^2.88.0"
   },
   "devDependencies": {
-    "jest": "^24.0.0",
+    "jest": "^24.8.0",
     "nock": "^10.0.0",
-    "nodemon": "^1.17.2",
-    "smee-client": "^1.0.2",
-    "standard": "^12.0.1"
-  },
-  "engines": {
-    "node": ">= 8.3.0"
-  },
-  "standard": {
-    "env": [
-      "jest"
-    ]
+    "smee-client": "^1.1.0",
+    "standard": "^12.0.1",
+    "@types/express": "^4.17.0",
+    "nodemon": "^1.19.1"
   },
   "nodemonConfig": {
-    "exec": "npm start",
-    "watch": [
-      ".env",
-      "."
+    "events": {
+      "start": "cls || clear"
+    },
+    "ignore": [
+      "log/"
     ]
   },
-  "jest": {
-    "testEnvironment": "node"
-  }
+  "browserslist": [
+    "last 2 version",
+    "> 1%",
+    "not ie <= 8",
+    "not dead"
+  ]
 }
