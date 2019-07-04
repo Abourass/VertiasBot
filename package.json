@@ -18,7 +18,9 @@
     "prod": "pm2-runtime start ecosystem.config.js --env production",
     "lint": "standard --fix",
     "test": "jest && standard",
-    "test:watch": "jest --watch --notify --notifyMode=change --coverage"
+    "test:watch": "jest --watch --notify --notifyMode=change --coverage",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "dependencies": {
     "@octokit/app": "^3.0.0",
@@ -30,7 +32,8 @@
     "mongoose": "^5.5.13",
     "passport": "^0.4.0",
     "probot": "^9.2.13",
-    "request": "^2.88.0"
+    "request": "^2.88.0",
+    "snyk": "^1.189.0"
   },
   "devDependencies": {
     "jest": "^24.8.0",
@@ -53,5 +56,6 @@
     "> 1%",
     "not ie <= 8",
     "not dead"
-  ]
+  ],
+  "snyk": true
 }
