@@ -23,25 +23,25 @@
     "prepare": "npm run snyk-protect"
   },
   "dependencies": {
-    "@octokit/app": "^3.0.0",
-    "@octokit/request": "^4.1.0",
-    "@octokit/rest": "^16.27.3",
-    "connect-mongo": "^2.0.3",
+    "@octokit/app": "^4.1.0",
+    "@octokit/request": "^5.0.2",
+    "@octokit/rest": "^16.28.7",
+    "connect-mongo": "^3.0.0",
     "cookie-parser": "^1.4.4",
-    "express-session": "^1.16.1",
-    "mongoose": "^5.5.13",
+    "express-session": "^1.16.2",
+    "mongoose": "^5.6.9",
     "passport": "^0.4.0",
-    "probot": "^9.2.13",
+    "probot": "^9.3.0",
     "request": "^2.88.0",
-    "snyk": "^1.189.0"
+    "snyk": "^1.216.0"
   },
   "devDependencies": {
+    "@types/express": "^4.17.0",
     "jest": "^24.8.0",
     "nock": "^10.0.0",
+    "nodemon": "^1.19.1",
     "smee-client": "^1.1.0",
-    "standard": "^12.0.1",
-    "@types/express": "^4.17.0",
-    "nodemon": "^1.19.1"
+    "standard": "^13.1.0"
   },
   "nodemonConfig": {
     "events": {
