@@ -33,7 +33,7 @@
     "passport": "^0.4.0",
     "probot": "^9.3.0",
     "request": "^2.88.0",
-    "snyk": "^1.216.0"
+    "snyk": "^1.230.5"
   },
   "devDependencies": {
     "@types/express": "^4.17.0",
